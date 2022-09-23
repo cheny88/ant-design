@@ -4,14 +4,15 @@ import CalendarOutlined from '@ant-design/icons/CalendarOutlined';
 import ClockCircleOutlined from '@ant-design/icons/ClockCircleOutlined';
 import CloseCircleFilled from '@ant-design/icons/CloseCircleFilled';
 import SwapRightOutlined from '@ant-design/icons/SwapRightOutlined';
-import { RangePicker as RCRangePicker } from 'rc-picker';
-import { GenerateConfig } from 'rc-picker/lib/generate/index';
+import {GenerateConfig} from 'rc-picker/lib/generate/index';
+import RCRangePicker from '../../../picker/RangePicker';
 import enUS from '../locale/en_US';
-import { ConfigContext, ConfigConsumerProps } from '../../config-provider';
+import {ConfigContext, ConfigConsumerProps} from '../../config-provider';
+// import DisabledContext from '../../config-provider/DisabledContext';
 import SizeContext from '../../config-provider/SizeContext';
 import LocaleReceiver from '../../locale-provider/LocaleReceiver';
-import { getRangePlaceholder } from '../util';
-import { RangePickerProps, PickerLocale, getTimeProps, Components } from '.';
+import {getRangePlaceholder} from '../util';
+import {RangePickerProps, PickerLocale, getTimeProps, Components} from '.';
 
 export default function generateRangePicker<DateType>(
   generateConfig: GenerateConfig<DateType>,
@@ -36,7 +37,7 @@ export default function generateRangePicker<DateType>(
     };
 
     getDefaultLocale = () => {
-      const { locale } = this.props;
+      const {locale} = this.props;
       const result = {
         ...enUS,
         ...locale,
@@ -49,7 +50,7 @@ export default function generateRangePicker<DateType>(
     };
 
     renderPicker = (locale: PickerLocale) => {
-      const { getPrefixCls, direction, getPopupContainer } = this.context;
+      const {getPrefixCls, direction, getPopupContainer} = this.context;
       const {
         prefixCls: customizePrefixCls,
         getPopupContainer: customGetPopupContainer,
@@ -59,15 +60,15 @@ export default function generateRangePicker<DateType>(
         placeholder,
         ...restProps
       } = this.props;
-      const { format, showTime, picker } = this.props as any;
+      const {format, showTime, picker} = this.props as any;
       const prefixCls = getPrefixCls('picker', customizePrefixCls);
 
       let additionalOverrideProps: any = {};
 
       additionalOverrideProps = {
         ...additionalOverrideProps,
-        ...(showTime ? getTimeProps({ format, picker, ...showTime }) : {}),
-        ...(picker === 'time' ? getTimeProps({ format, ...this.props, picker }) : {}),
+        ...(showTime ? getTimeProps({format, picker, ...showTime}) : {}),
+        ...(picker === 'time' ? getTimeProps({format, ...this.props, picker}) : {}),
       };
 
       return (
@@ -79,13 +80,13 @@ export default function generateRangePicker<DateType>(
               <RCRangePicker<DateType>
                 separator={
                   <span aria-label="to" className={`${prefixCls}-separator`}>
-                    <SwapRightOutlined />
+                    <SwapRightOutlined/>
                   </span>
                 }
                 ref={this.pickerRef}
                 placeholder={getRangePlaceholder(picker, locale, placeholder)}
-                suffixIcon={picker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />}
-                clearIcon={<CloseCircleFilled />}
+                suffixIcon={picker === 'time' ? <ClockCircleOutlined/> : <CalendarOutlined/>}
+                clearIcon={<CloseCircleFilled/>}
                 allowClear
                 transitionName="slide-up"
                 {...restProps}
@@ -101,10 +102,10 @@ export default function generateRangePicker<DateType>(
                 prefixCls={prefixCls}
                 getPopupContainer={customGetPopupContainer || getPopupContainer}
                 generateConfig={generateConfig}
-                prevIcon={<span className={`${prefixCls}-prev-icon`} />}
-                nextIcon={<span className={`${prefixCls}-next-icon`} />}
-                superPrevIcon={<span className={`${prefixCls}-super-prev-icon`} />}
-                superNextIcon={<span className={`${prefixCls}-super-next-icon`} />}
+                prevIcon={<span className={`${prefixCls}-prev-icon`}/>}
+                nextIcon={<span className={`${prefixCls}-next-icon`}/>}
+                superPrevIcon={<span className={`${prefixCls}-super-prev-icon`}/>}
+                superNextIcon={<span className={`${prefixCls}-super-next-icon`}/>}
                 components={Components}
                 direction={direction}
               />

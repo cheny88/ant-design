@@ -263,14 +263,14 @@
     &-in-view&-in-range&-range-hover::before,
     &-in-view&-range-start&-range-hover::before,
     &-in-view&-range-end&-range-hover::before,
-    &-in-view&-range-start:not(&-range-start-single)&-range-hover-start::before,
-    &-in-view&-range-end:not(&-range-end-single)&-range-hover-end::before,
+    &-in-view&-range-start:not(&-range-start-single) &-range-hover-start::before,
+    &-in-view&-range-end:not(&-range-end-single) &-range-hover-end::before,
     .@{picker-prefix-cls}-panel
-      > :not(.@{picker-prefix-cls}-date-panel)
-      &-in-view&-in-range&-range-hover-start::before,
+    > :not(.@{picker-prefix-cls}-date-panel)
+    &-in-view&-in-range&-range-hover-start::before,
     .@{picker-prefix-cls}-panel
-      > :not(.@{picker-prefix-cls}-date-panel)
-      &-in-view&-in-range&-range-hover-end::before {
+    > :not(.@{picker-prefix-cls}-date-panel)
+    &-in-view&-in-range&-range-hover-end::before {
       background: @picker-date-hover-range-color;
     }
 
@@ -296,8 +296,8 @@
       }
     }
     .@{picker-prefix-cls}-date-panel
-      &-in-view&-in-range&-range-hover-start
-      .@{cellClassName}::after {
+    &-in-view&-in-range&-range-hover-start
+    .@{cellClassName}::after {
       right: -5px - @border-width-base;
       left: 0;
     }
@@ -485,6 +485,7 @@
         border-radius: 0 @border-radius-base @border-radius-base 0;
       }
     }
+
     .@{picker-prefix-cls}-cell-range-hover-end::after {
       right: @hover-cell-fixed-distance;
       border-right: @border-width-base dashed @picker-date-hover-range-border-color;
@@ -519,13 +520,35 @@
       }
 
       &:hover td {
-        background: @picker-basic-cell-hover-color;
+        background: #b8cbf5;
+        color: white;
       }
 
       &-selected td,
-      &-selected:hover td {
-        background: @primary-color;
+      &-range-start td,
+      &-range-end td {
+        background: #1f59d6;
+        color: white;
 
+        &:hover td {
+          background: #b8cbf5;
+          color: white;
+        }
+      }
+
+      &-in-range {
+        background: #e6f7ff
+      }
+      &-range-hover{
+        background: #e6f7ff
+      }
+
+      //&:hover td {
+      //  background: @picker-basic-cell-hover-color;
+      //}
+
+      &-selected td,
+      &-selected:hover td {
         &.@{picker-prefix-cls}-cell-week {
           color: fade(@text-color-inverse, 50%);
         }
@@ -607,6 +630,7 @@
         display: block;
         height: @picker-time-panel-column-height - @picker-time-panel-cell-height;
         content: '';
+
         .@{picker-prefix-cls}-datetime-panel & {
           height: @picker-time-panel-column-height - @picker-time-panel-cell-height + 2 *
             @border-width-base;
